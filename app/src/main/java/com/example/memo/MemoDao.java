@@ -36,5 +36,12 @@ public interface MemoDao  {
     @Query ("update memodatalist set memo = :setmemo where id = :posid")
     public void  updatememo(String setmemo, int posid);
 
+    //추가
+    @Query("select * from memodatalist where Alarm = 1")    // 1 = o , 2 = x
+    public List<MemoDatalist>getData();
+    @Query ("update memodatalist set Alarm = 2 where id = :posid")
+    public void  checkData(int posid);
+
+
 
 }

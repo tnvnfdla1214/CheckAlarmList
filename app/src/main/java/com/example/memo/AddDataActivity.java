@@ -29,8 +29,9 @@ public class AddDataActivity extends AppCompatActivity {
                 String memo=etmemo.getText().toString();
                 MemoDatalist memoDataList=new MemoDatalist();
                 memoDataList.setMemo(memo);
-                MainActivity.memoDatabase.memoDao().addData(memoDataList);
-                Toast.makeText(getApplicationContext(),"데이터가 저장되었습니다.",Toast.LENGTH_LONG).show();
+                memoDataList.setAlarm(1);
+                Fragment1.memoDatabase.memoDao().addData(memoDataList);
+                Toast.makeText(getApplicationContext(),"일정이 추가되었습니다.",Toast.LENGTH_LONG).show();
                 etmemo.setText("");
             }
         });

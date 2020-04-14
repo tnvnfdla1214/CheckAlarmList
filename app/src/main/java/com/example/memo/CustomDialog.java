@@ -47,7 +47,7 @@ public class CustomDialog extends Dialog {
                     //Listener를 통해서 person객체 전달
                     listener.onFinish(position, memoDataList);
                     //다이얼로그 종료
-                    Toast.makeText(context.getApplicationContext(),"데이터가 수정되었습니다.",Toast.LENGTH_LONG).show();
+                    Toast.makeText(context.getApplicationContext(),"일정이 수정되었습니다.",Toast.LENGTH_LONG).show();
                     dismiss();
                 }
 

@@ -98,10 +98,9 @@ public class MemoAdapter  extends RecyclerView.Adapter<MemoAdapter.ViewHolder> i
 
 
         int ID = memoDataLists.get(position).getId();
-        MainActivity.memoDatabase.memoDao().deleteData(ID);
-        //MainActivity.myDatabase.myDao().delete(myDataList);  //1
+        Fragment1.memoDatabase.memoDao().checkData(ID);
 
-        Toast.makeText(context.getApplicationContext(),"데이터가 삭제되었습니다.",Toast.LENGTH_LONG).show();
+        Toast.makeText(context.getApplicationContext(),"일정이 확인되었습니다.",Toast.LENGTH_LONG).show();
 
         memoDataLists.remove(position);
         notifyItemRemoved(position);
@@ -114,10 +113,8 @@ public class MemoAdapter  extends RecyclerView.Adapter<MemoAdapter.ViewHolder> i
 
         String getmemo = myDatalists.getMemo();
 
-
         int ID = memoDataLists.get(position).getId();
-
-        MainActivity.memoDatabase.memoDao().updatememo(getmemo,ID);
+        Fragment1.memoDatabase.memoDao().updatememo(getmemo,ID);
 
 
         memoDataLists.set(position,myDatalists);

@@ -13,6 +13,8 @@ public class MemoDatalist {
     private String Memo;
     @ColumnInfo(name = "Time")
     private long Time;
+    @ColumnInfo(name = "Alarm")
+    private int Alarm;
 
 
     public int getId() {
@@ -34,4 +36,6 @@ public class MemoDatalist {
         this.Time = Time;
     }
 
+    public int getAlarm() { return Alarm; }
+    public void setAlarm(int alarm) { Alarm = alarm; }
 }
