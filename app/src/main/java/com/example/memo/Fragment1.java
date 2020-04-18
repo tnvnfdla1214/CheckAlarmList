@@ -1,5 +1,6 @@
 package com.example.memo;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -24,37 +25,21 @@ public class Fragment1 extends Fragment {
 
     List<MemoDatalist> memoDataLists;
     public static MemoDatabase memoDatabase;
-    private RecyclerView rv;
+    public RecyclerView rv;
     ItemTouchHelper helper;
     MemoAdapter adapter;
     Button btn_save;
 
+
+    public static Fragment1 mContext;
+
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
+        mContext = this;
         super.onCreate(savedInstanceState);
     }
 
 
-    private void getData() {
-        class GetData extends AsyncTask<Void, Void, List<MemoDatalist>> {
-
-            @Override
-            protected List<MemoDatalist> doInBackground(Void... voids) {
-                List<MemoDatalist> memoDataLists=Fragment1.memoDatabase.memoDao().getData();
-                return memoDataLists;
-            }
-            @Override
-            protected void onPostExecute(List<MemoDatalist> memoDatalist) {
-                //6번
-                MemoAdapter adapter=new MemoAdapter(memoDatalist,getActivity());
-                rv.setAdapter(adapter);
-                super.onPostExecute(memoDatalist);
-            }
-        }
-
-        GetData gd=new GetData();
-        gd.execute();
-    }
 
     @Nullable
     @Override
@@ -72,7 +57,7 @@ public class Fragment1 extends Fragment {
         rv.setHasFixedSize(true);
         //4번
         rv.setLayoutManager(new LinearLayoutManager(getActivity()));
-        getData();
+
 
         memoDataLists=Fragment1.memoDatabase.memoDao().getData();
         //RecyclerView의 Adapter 세팅
@@ -98,6 +83,15 @@ public class Fragment1 extends Fragment {
         });
         return viewGroup;
     }
+
+    public void Review(){
+        memoDataLists=Fragment1.memoDatabase.memoDao().getData();
+        //RecyclerView의 Adapter 세팅
+        //5번
+        adapter = new MemoAdapter(memoDataLists,getContext());
+        rv.setAdapter(adapter);
+    }
+
 
 
 }

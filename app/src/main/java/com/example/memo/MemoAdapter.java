@@ -11,6 +11,7 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.room.Database;
 
 import java.util.List;
 
@@ -105,6 +106,8 @@ public class MemoAdapter  extends RecyclerView.Adapter<MemoAdapter.ViewHolder> i
         memoDataLists.remove(position);
         notifyItemRemoved(position);
         //Log.v("태그","메세지4");
+
+
     }
 
 

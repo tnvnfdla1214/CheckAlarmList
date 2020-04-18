@@ -21,21 +21,14 @@
                 android:layout_weight="1">
 
                 <TableRow>
-                    <TextView
-                        android:textColor="@android:color/black"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="left"
-                        android:layout_marginLeft="10dp"
-                        android:text="메모"
-                        android:textSize="20sp" />
+
                     <TextView
                         android:id="@+id/txt_memo"
                         android:textColor="@android:color/black"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
-                        android:textSize="20sp" />
+                        android:textSize="30sp" />
                 </TableRow>
 
             </TableLayout>

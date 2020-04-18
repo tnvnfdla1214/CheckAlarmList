@@ -3,6 +3,7 @@ package com.example.memo;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
 
@@ -12,6 +13,8 @@ public class Main extends AppCompatActivity {
     BottomNavigationView bottomNavigationView;
     Fragment1 fragment1;
     Fragment2 fragment2;
+    private Intent serviceIntent;
+    private Intent intent;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -22,8 +25,6 @@ public class Main extends AppCompatActivity {
         //프래그먼트 생성
         fragment1 = new Fragment1();
         fragment2 = new Fragment2();
-
-
 
         //제일 처음 띄워줄 뷰를 세팅해줍니다. commit();까지 해줘야 합니다.
         getSupportFragmentManager().beginTransaction().replace(R.id.main_layout, fragment1).commitAllowingStateLoss();
@@ -49,4 +50,7 @@ public class Main extends AppCompatActivity {
             }
         });
     }
+
+
+
 }

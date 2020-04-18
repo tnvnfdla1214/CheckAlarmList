@@ -33,27 +33,6 @@ public class Fragment2 extends Fragment {
     }
 
 
-    private void getData() {
-        class GetData extends AsyncTask<Void, Void, List<MemoDatalist>> {
-
-            @Override
-            protected List<MemoDatalist> doInBackground(Void... voids) {
-                List<MemoDatalist> memoDataLists=Fragment1.memoDatabase.memoDao().getMemoData();
-                return memoDataLists;
-            }
-            @Override
-            protected void onPostExecute(List<MemoDatalist> memoDatalist) {
-                //6번
-                MemoAdapter adapter=new MemoAdapter(memoDatalist,getActivity());
-                rv.setAdapter(adapter);
-                super.onPostExecute(memoDatalist);
-            }
-        }
-
-        GetData gd=new GetData();
-        gd.execute();
-    }
-
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -70,7 +49,6 @@ public class Fragment2 extends Fragment {
         rv.setHasFixedSize(true);
         //4번
         rv.setLayoutManager(new LinearLayoutManager(getActivity()));
-        getData();
 
         memoDataLists=Fragment1.memoDatabase.memoDao().getMemoData();
         //RecyclerView의 Adapter 세팅

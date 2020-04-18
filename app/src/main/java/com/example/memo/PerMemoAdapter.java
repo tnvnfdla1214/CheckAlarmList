@@ -99,7 +99,7 @@ public class PerMemoAdapter  extends RecyclerView.Adapter<PerMemoAdapter.ViewHol
 
         int ID = memoDataLists.get(position).getId();
         Fragment2.memoDatabase.memoDao().deleteData(ID);
-        //MainActivity.myDatabase.myDao().delete(myDataList);  //1
+
 
         Toast.makeText(context.getApplicationContext(),"일정이 삭제되었습니다.",Toast.LENGTH_LONG).show();
 
@@ -112,13 +112,7 @@ public class PerMemoAdapter  extends RecyclerView.Adapter<PerMemoAdapter.ViewHol
     @Override
     public void onFinish(int position,MemoDatalist myDatalists) {
 
-        String getmemo = myDatalists.getMemo();
-
-
         int ID = memoDataLists.get(position).getId();
-
-        Fragment1.memoDatabase.memoDao().updatememo(getmemo,ID);
-
 
         memoDataLists.set(position,myDatalists);
         notifyItemChanged(position);
