@@ -58,8 +58,10 @@ public class Main extends AppCompatActivity {
         calendar1.set(Calendar.MINUTE, 58);
         calendar1.set(Calendar.SECOND, 00);
 
+
         if (calendar1.before(Calendar.getInstance())) {
             calendar1.add(Calendar.DATE, 1);
+            
         }
 
         SharedPreferences.Editor editorAM = getSharedPreferences("daily alarm", MODE_PRIVATE).edit();
