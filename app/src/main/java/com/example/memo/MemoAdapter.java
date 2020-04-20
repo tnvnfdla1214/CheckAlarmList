@@ -34,12 +34,9 @@ public class MemoAdapter  extends RecyclerView.Adapter<MemoAdapter.ViewHolder> i
     @Override
     public void onBindViewHolder(@NonNull ViewHolder viewHolder, int position) {
         MemoDatalist md=memoDataLists.get(position);
-
-
         viewHolder.txtmemo.setText(md.getMemo());
-
+        viewHolder.txtAP.setText(md.getAM_PM());
         viewHolder.onBind(memoDataLists.get(position));
-
 
     }
 
@@ -129,14 +126,16 @@ public class MemoAdapter  extends RecyclerView.Adapter<MemoAdapter.ViewHolder> i
 
 
     public class ViewHolder extends RecyclerView.ViewHolder{
-        public TextView txtmemo;
+        public TextView txtmemo,txtAP;
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
             txtmemo=(TextView)itemView.findViewById(R.id.txt_memo);
+            txtAP=(TextView)itemView.findViewById(R.id.txt_AMPM);
 
         }
         public void onBind(MemoDatalist memoDataLists) {
             txtmemo.setText(memoDataLists.getMemo());
+            txtAP.setText(memoDataLists.getAM_PM());
 
         }
 

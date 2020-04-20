@@ -11,10 +11,10 @@ public class MemoDatalist {
     private int id;
     @ColumnInfo(name = "Memo")
     private String Memo;
-    @ColumnInfo(name = "Time")
-    private long Time;
     @ColumnInfo(name = "Alarm")
     private int Alarm;
+    @ColumnInfo(name = "AM_PM")
+    private String AM_PM;
 
 
     public int getId() {
@@ -26,16 +26,10 @@ public class MemoDatalist {
     public String getMemo() {
         return Memo;
     }
-    public void setMemo(String Memo) {
-        this.Memo = Memo;
-    }
-    public long getTime() {
-        return Time;
-    }
-    public void setTime(long Time) {
-        this.Time = Time;
-    }
-
+    public void setMemo(String Memo) { this.Memo = Memo; }
     public int getAlarm() { return Alarm; }
     public void setAlarm(int alarm) { Alarm = alarm; }
+
+    public String getAM_PM() {return AM_PM; }
+    public void setAM_PM(String AM_PM) {this.AM_PM = AM_PM;}
 }

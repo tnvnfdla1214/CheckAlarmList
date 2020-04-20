@@ -18,7 +18,11 @@ import androidx.recyclerview.widget.RecyclerView;
 import androidx.room.Room;
 
 
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
+import java.util.Locale;
 
 public class Fragment1 extends Fragment {
     ViewGroup viewGroup;
@@ -60,6 +64,16 @@ public class Fragment1 extends Fragment {
 
 
         memoDataLists=Fragment1.memoDatabase.memoDao().getData();
+
+
+
+
+
+
+
+
+
+        //memoDataLists=Fragment1.memoDatabase.memoDao().getData();
         //RecyclerView의 Adapter 세팅
         //5번
         adapter = new MemoAdapter(memoDataLists,getContext());
@@ -91,7 +105,5 @@ public class Fragment1 extends Fragment {
         adapter = new MemoAdapter(memoDataLists,getContext());
         rv.setAdapter(adapter);
     }
-
-
 
 }

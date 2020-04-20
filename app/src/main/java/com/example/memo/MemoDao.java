@@ -13,12 +13,6 @@ public interface MemoDao  {
     @Insert
     void addData(MemoDatalist memodatalist);
 
-/*    @Delete
-    int
-    delete(MyDatalist mydatalist);
-    @Query("delete from mydatalist WHERE id = :Id")
-    List<MyDatalist> delete(int Id ,String name ,String email ,String city);*/
-
     @Update
     public void update(MemoDatalist memodatalist);
 
@@ -39,13 +33,15 @@ public interface MemoDao  {
     //추가
     @Query("select * from memodatalist where Alarm = 1")    // 1 = o , 2 = x
     public List<MemoDatalist>getData();
-
-
     @Query ("update memodatalist set Alarm = 2 where id = :posid")  //1->2
     public void  checkData(int posid);
-
     @Query ("update memodatalist set Alarm = 1 ")  //2->1
     public void  resetData();
+
+    @Query ("update memodatalist set Alarm = 1 where AM_PM = 3")  //->3
+    public void  resetAm();
+    @Query ("update memodatalist set Alarm = 1 where AM_PM = 4")  //->4
+    public void  resetPm();
 
 
 

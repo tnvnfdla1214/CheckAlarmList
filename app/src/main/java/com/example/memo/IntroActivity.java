@@ -18,7 +18,7 @@ public class IntroActivity extends Activity {
                 startActivity(intent); //다음화면으로 넘어감
                 finish();
             }
-        },2000); //3초 뒤에 Runner객체 실행하도록 함
+        },1500); //3초 뒤에 Runner객체 실행하도록 함
     }
 
     @Override

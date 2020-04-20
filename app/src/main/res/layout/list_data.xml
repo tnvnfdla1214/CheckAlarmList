@@ -27,7 +27,17 @@
                         android:textColor="@android:color/black"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_gravity="center"
+
+                        android:textSize="30sp" />
+                </TableRow>
+                <TableRow>
+
+                    <TextView
+                        android:id="@+id/txt_AMPM"
+                        android:textColor="@android:color/black"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+
                         android:textSize="30sp" />
                 </TableRow>
 
