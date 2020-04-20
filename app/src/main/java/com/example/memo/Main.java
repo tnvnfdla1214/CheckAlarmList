@@ -55,7 +55,7 @@ public class Main extends AppCompatActivity {
         //  Preference에 설정한 값 저장
         Calendar calendar1 = Calendar.getInstance();
         calendar1.set(Calendar.HOUR_OF_DAY, 1);
-        calendar1.set(Calendar.MINUTE, 36);
+        calendar1.set(Calendar.MINUTE, 58);
         calendar1.set(Calendar.SECOND, 00);
 
         if (calendar1.before(Calendar.getInstance())) {
@@ -68,7 +68,7 @@ public class Main extends AppCompatActivity {
         diaryNotification(calendar1);
 
 
-        SharedPreferences sharedPreferencesPM = getSharedPreferences("daily alarm2", MODE_PRIVATE);
+        /*SharedPreferences sharedPreferencesPM = getSharedPreferences("daily alarm2", MODE_PRIVATE);
         long PM = sharedPreferencesPM.getLong("nextNotifyTime2", Calendar.getInstance().getTimeInMillis());
         Calendar nextNotifyTimePM = new GregorianCalendar();
         nextNotifyTimePM.setTimeInMillis(PM);
@@ -78,13 +78,13 @@ public class Main extends AppCompatActivity {
         calendar2.set(Calendar.SECOND, 00);
 
         if (calendar2.before(Calendar.getInstance())) {
-            calendar2.add(Calendar.DATE, 1);
+            calendar2.add(Calendar.HOUR_OF_DAY,12 );
         }
 
         SharedPreferences.Editor editorPM = getSharedPreferences("daily alarm2", MODE_PRIVATE).edit();
         editorPM.putLong("nextNotifyTime2", (long) calendar2.getTimeInMillis());
         editorPM.apply();
-        diaryNotification2(calendar2);
+        diaryNotification2(calendar2);*/
 
 
 
@@ -97,7 +97,7 @@ public class Main extends AppCompatActivity {
         SimpleDateFormat HourFormatAM = new SimpleDateFormat("kk", Locale.getDefault());
         SimpleDateFormat MinuteFormatAM = new SimpleDateFormat("mm", Locale.getDefault());
 
-        Date currentTimePM = nextNotifyTimePM.getTime();
+        /*Date currentTimePM = nextNotifyTimePM.getTime();*/
         SimpleDateFormat HourFormatPM = new SimpleDateFormat("kk", Locale.getDefault());
         SimpleDateFormat MinuteFormatPM = new SimpleDateFormat("mm", Locale.getDefault());
 
@@ -105,8 +105,8 @@ public class Main extends AppCompatActivity {
         int pre_hourAM = Integer.parseInt(HourFormatAM.format(currentTimeAM));
         int pre_minuteAM = Integer.parseInt(MinuteFormatAM.format(currentTimeAM));
 
-        int pre_hourPM = Integer.parseInt(HourFormatPM.format(currentTimePM));
-        int pre_minutePM = Integer.parseInt(MinuteFormatPM.format(currentTimePM));
+        /*int pre_hourPM = Integer.parseInt(HourFormatPM.format(currentTimePM));
+        int pre_minutePM = Integer.parseInt(MinuteFormatPM.format(currentTimePM));*/
 
 
         /*Date currentDateTimeAM = calendar1.getTime();
