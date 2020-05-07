@@ -39,35 +39,12 @@ public class BackGroundService extends Service {
     public void onCreate() {
         super.onCreate();
         // 서비스에서 가장 먼저 호출됨(최초에 한번만)
-//        Calendar calendar = Calendar.getInstance();
-//        Calendar Currentcalendar = Calendar.getInstance();
-//
-//        Currentcalendar.setTimeInMillis(System.currentTimeMillis());
-//        calendar.set(Calendar.HOUR_OF_DAY, 23);
-//        calendar.set(Calendar.MINUTE, 40);
-//        calendar.set(Calendar.SECOND, 0);
-//
-//        if(Currentcalendar.MINUTE == calendar.MINUTE && Currentcalendar.HOUR_OF_DAY == calendar.HOUR_OF_DAY){
-//            Fragment1.memoDatabase.memoDao().resetData();
-//        }
-
     }
 
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
         super.onStartCommand(intent, flags, startId);
         // 서비스가 호출될 때마다 실행
-//        Calendar calendar = Calendar.getInstance();
-//        Calendar Currentcalendar = Calendar.getInstance();
-//
-//        Currentcalendar.setTimeInMillis(System.currentTimeMillis());
-//        calendar.set(Calendar.HOUR_OF_DAY, 23);
-//        calendar.set(Calendar.MINUTE, 37);
-//        calendar.set(Calendar.SECOND, 0);
-//
-//        if(Currentcalendar.MINUTE == calendar.MINUTE && Currentcalendar.HOUR_OF_DAY == calendar.HOUR_OF_DAY){
-//            Fragment1.memoDatabase.memoDao().resetData();
-//        }
 
         startTimer();
         return START_STICKY;

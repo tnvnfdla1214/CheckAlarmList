@@ -66,8 +66,8 @@ public class AlarmReceiver extends BroadcastReceiver {
 
                 .setTicker("{Time to watch some cool stuff!}")
                 .setContentTitle("알람이 리셋되었습니다.")
-                .setContentText("알람이 리셋되었습니다.")
-                .setContentInfo("INFO")
+                .setContentText("일정을 확인하거나 새로운 일정을 추가하세요!")
+                //.setContentInfo("INFO")
                 .setContentIntent(pendingI);
 
         if (notificationManager != null) {
@@ -87,8 +87,16 @@ public class AlarmReceiver extends BroadcastReceiver {
 
 
 
-            Fragment1.memoDatabase.memoDao().resetAm();
-            (Fragment1.mContext).Review();
+            if(Calendar.HOUR_OF_DAY == 12 ){
+                Fragment1.memoDatabase.memoDao().resetAm();
+                (Fragment1.mContext).Review();
+                //Main.calendar1.add(Calendar.MINUTE, 3);
+            }else{
+                Fragment1.memoDatabase.memoDao().resetPm();
+                (Fragment1.mContext).Review();
+                //Main.calendar1.add(Calendar.MINUTE, 1);
+            }
+
 
         }
     }

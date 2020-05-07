@@ -35,12 +35,12 @@ public interface MemoDao  {
     public List<MemoDatalist>getData();
     @Query ("update memodatalist set Alarm = 2 where id = :posid")  //1->2
     public void  checkData(int posid);
-    @Query ("update memodatalist set Alarm = 1 ")  //2->1
+    @Query ("update memodatalist set Alarm = 1 where Alarm = 2 ")  //2->1
     public void  resetData();
 
-    @Query ("update memodatalist set Alarm = 1 where AM_PM = 3")  //->3
+    @Query ("update memodatalist set Alarm = 1 where AM_PM = '오전'")  //->3
     public void  resetAm();
-    @Query ("update memodatalist set Alarm = 1 where AM_PM = 4")  //->4
+    @Query ("update memodatalist set Alarm = 1 where AM_PM = '오후'")  //->4
     public void  resetPm();
 
 

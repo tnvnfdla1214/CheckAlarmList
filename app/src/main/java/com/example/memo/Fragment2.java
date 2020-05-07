@@ -50,7 +50,7 @@ public class Fragment2 extends Fragment {
         //4번
         rv.setLayoutManager(new LinearLayoutManager(getActivity()));
 
-        memoDataLists=Fragment1.memoDatabase.memoDao().getMemoData();
+        memoDataLists=memoDatabase.memoDao().getMemoData();
         //RecyclerView의 Adapter 세팅
         //5번
         adapter = new PerMemoAdapter(memoDataLists,getContext());

@@ -63,14 +63,7 @@ public class Fragment1 extends Fragment {
         rv.setLayoutManager(new LinearLayoutManager(getActivity()));
 
 
-        memoDataLists=Fragment1.memoDatabase.memoDao().getData();
-
-
-
-
-
-
-
+        memoDataLists=memoDatabase.memoDao().getData();
 
 
         //memoDataLists=Fragment1.memoDatabase.memoDao().getData();
@@ -99,7 +92,7 @@ public class Fragment1 extends Fragment {
     }
 
     public void Review(){
-        memoDataLists=Fragment1.memoDatabase.memoDao().getData();
+        memoDataLists=memoDatabase.memoDao().getData();
         //RecyclerView의 Adapter 세팅
         //5번
         adapter = new MemoAdapter(memoDataLists,getContext());

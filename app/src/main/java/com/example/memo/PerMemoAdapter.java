@@ -112,7 +112,9 @@ public class PerMemoAdapter  extends RecyclerView.Adapter<PerMemoAdapter.ViewHol
     @Override
     public void onFinish(int position,MemoDatalist myDatalists) {
 
+        String getmemo = myDatalists.getMemo();
         int ID = memoDataLists.get(position).getId();
+        Fragment1.memoDatabase.memoDao().updatememo(getmemo,ID);
 
         memoDataLists.set(position,myDatalists);
         notifyItemChanged(position);
@@ -123,14 +125,16 @@ public class PerMemoAdapter  extends RecyclerView.Adapter<PerMemoAdapter.ViewHol
 
 
     public class ViewHolder extends RecyclerView.ViewHolder{
-        public TextView txtmemo;
+        public TextView txtmemo,txtAP;
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
             txtmemo=(TextView)itemView.findViewById(R.id.txt_memo);
+            txtAP=(TextView)itemView.findViewById(R.id.txt_AMPM);
 
         }
         public void onBind(MemoDatalist memoDataLists) {
             txtmemo.setText(memoDataLists.getMemo());
+            txtAP.setText(memoDataLists.getAM_PM());
 
         }
 

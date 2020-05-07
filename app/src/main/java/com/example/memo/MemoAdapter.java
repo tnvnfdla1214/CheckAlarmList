@@ -35,7 +35,6 @@ public class MemoAdapter  extends RecyclerView.Adapter<MemoAdapter.ViewHolder> i
     public void onBindViewHolder(@NonNull ViewHolder viewHolder, int position) {
         MemoDatalist md=memoDataLists.get(position);
         viewHolder.txtmemo.setText(md.getMemo());
-        viewHolder.txtAP.setText(md.getAM_PM());
         viewHolder.onBind(memoDataLists.get(position));
 
     }

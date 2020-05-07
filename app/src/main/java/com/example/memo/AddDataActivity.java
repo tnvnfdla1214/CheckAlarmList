@@ -26,14 +26,15 @@ public class AddDataActivity extends AppCompatActivity {
         setContentView(R.layout.activity_add_data);
         etmemo=(EditText)findViewById(R.id.editmemo);
         btn_save=(Button)findViewById(R.id.btn_add);
+        final MemoDatalist memoDataList=new MemoDatalist();
         final CheckBox am = (CheckBox) findViewById(R.id.AM) ;
         final CheckBox pm = (CheckBox) findViewById(R.id.PM) ;
-        final MemoDatalist memoDataList=new MemoDatalist();
+
         am.setOnClickListener(new CheckBox.OnClickListener(){
             @Override
             public void onClick(View v){
                 if(((CheckBox)v).isChecked()){
-                    memoDataList.setAM_PM("3");
+                    memoDataList.setAM_PM("오전 알림");
                     pm.setChecked(false);
                 }
             }
@@ -43,7 +44,7 @@ public class AddDataActivity extends AppCompatActivity {
             @Override
             public void onClick(View v){
                 if(((CheckBox)v).isChecked()){
-                    memoDataList.setAM_PM("4");
+                    memoDataList.setAM_PM("오후 알림");
                     am.setChecked(false);
                 }
             }
@@ -53,15 +54,20 @@ public class AddDataActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
+                if(pm.isChecked() || am.isChecked()){
+                }else{
+                    Toast.makeText(getApplicationContext(),"오전/오후를 선택해주세요.",Toast.LENGTH_LONG).show();
+
+                }
+
+
 
                 String memo=etmemo.getText().toString();
+
 
                 memoDataList.setMemo(memo);
                 memoDataList.setAlarm(1);
                 int ID_len = memoDataList.getId();
-
-
-
 
                 Fragment1.memoDatabase.memoDao().addData(memoDataList);
 
@@ -74,6 +80,7 @@ public class AddDataActivity extends AppCompatActivity {
                 etmemo.setText("");
                 am.setChecked(false);
                 pm.setChecked(false);
+
 
                 ((Fragment1) Fragment1.mContext).Review();
 
