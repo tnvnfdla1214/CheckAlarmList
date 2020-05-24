@@ -25,10 +25,10 @@ import java.util.Locale;
 
 public class Main extends AppCompatActivity {
     public static Calendar calendar1 = Calendar.getInstance();
-    public static Calendar calendar2 = Calendar.getInstance();
     BottomNavigationView bottomNavigationView;
     Fragment1 fragment1;
     Fragment2 fragment2;
+    public static int min = calendar1.MINUTE;
 //    Calendar calendar1
 
     @Override
@@ -45,6 +45,12 @@ public class Main extends AppCompatActivity {
         calendar1.set(Calendar.MINUTE, 00);
         calendar1.set(Calendar.SECOND, 00);
 
+        if (calendar1.before(Calendar.getInstance())) {
+            calendar1.add(Calendar.DATE, 1);
+        }
+        SharedPreferences.Editor editorAM = getSharedPreferences("daily alarm", MODE_PRIVATE).edit();
+        editorAM.putLong("nextNotifyTime", (long) calendar1.getTimeInMillis());
+        editorAM.apply();
         diaryNotification(calendar1);
 
         //프래그먼트 생성

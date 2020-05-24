@@ -19,6 +19,7 @@ import java.util.Locale;
 
 
 import static android.content.Context.MODE_PRIVATE;
+import static com.example.memo.Main.calendar1;
 
 public class AlarmReceiver extends BroadcastReceiver {
     List<MemoDatalist> memoDataLists;
@@ -62,6 +63,9 @@ public class AlarmReceiver extends BroadcastReceiver {
                 .setContentIntent(pendingI);
 
         if (notificationManager != null) {
+
+
+
             // 노티피케이션 동작시킴
             notificationManager.notify(1234, builder.build());
             Calendar nextNotifyTime = Calendar.getInstance();
@@ -72,8 +76,15 @@ public class AlarmReceiver extends BroadcastReceiver {
             editor.putLong("nextNotifyTime", nextNotifyTime.getTimeInMillis());
             editor.apply();
 
-            Fragment1.memoDatabase.memoDao().resetData();
-            (Fragment1.mContext).Review();
+
+            if(00 <= Calendar.getInstance().get(Calendar.HOUR_OF_DAY) && Calendar.getInstance().get(Calendar.HOUR_OF_DAY) < 01
+             && 00 <= Calendar.getInstance().get(Calendar.MINUTE) && Calendar.getInstance().get(Calendar.MINUTE) < 01
+             && 00 <= Calendar.getInstance().get(Calendar.SECOND) && Calendar.getInstance().get(Calendar.SECOND) < 01){
+
+                Fragment1.memoDatabase.memoDao().resetData();
+                (Fragment1.mContext).Review();
+            }
+
 
         }
     }
