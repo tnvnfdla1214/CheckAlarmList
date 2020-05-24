@@ -20,50 +20,29 @@ import java.util.List;
 
 public class Fragment2 extends Fragment {
     ViewGroup viewGroup;
-
     List<MemoDatalist> memoDataLists;
     public static MemoDatabase memoDatabase;
     private RecyclerView rv;
     ItemTouchHelper helper;
     PerMemoAdapter adapter;
-
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
     }
-
-
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 
         viewGroup = (ViewGroup) inflater.inflate(R.layout.activity_memo,container,false);
-
-        //1번
         memoDatabase= Room.databaseBuilder(getActivity().getApplicationContext(),MemoDatabase.class,"infodb").allowMainThreadQueries().build();
-
-
-
-        //2번
         rv=(RecyclerView)viewGroup.findViewById(R.id.rec1);
         rv.setHasFixedSize(true);
-        //4번
         rv.setLayoutManager(new LinearLayoutManager(getActivity()));
-
         memoDataLists=memoDatabase.memoDao().getMemoData();
-        //RecyclerView의 Adapter 세팅
-        //5번
         adapter = new PerMemoAdapter(memoDataLists,getContext());
         rv.setAdapter(adapter);
-
-
-        //ItemTouchHelper 생성
         helper = new ItemTouchHelper(new ItemTouchHelperCallback2(adapter));
-        //RecyclerView에 ItemTouchHelper 붙이기
         helper.attachToRecyclerView(rv);
-
         return viewGroup;
     }
-
-
 }

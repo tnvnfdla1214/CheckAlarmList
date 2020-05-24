@@ -23,27 +23,23 @@ public class MemoAdapter  extends RecyclerView.Adapter<MemoAdapter.ViewHolder> i
         this.memoDataLists = myDataLists;
         this.context = context;
     }
-
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int position) {
         View view= LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.list_data,viewGroup,false);
         return new ViewHolder(view);
     }
-
     @Override
     public void onBindViewHolder(@NonNull ViewHolder viewHolder, int position) {
         MemoDatalist md=memoDataLists.get(position);
         viewHolder.txtmemo.setText(md.getMemo());
         viewHolder.onBind(memoDataLists.get(position));
-
     }
 
     @Override
     public int getItemCount() {
         return memoDataLists.size();
     }
-
 
     @Override
     public boolean onItemMove(int from_position, int to_position) {
@@ -109,32 +105,23 @@ public class MemoAdapter  extends RecyclerView.Adapter<MemoAdapter.ViewHolder> i
 
     @Override
     public void onFinish(int position,MemoDatalist myDatalists) {
-
         String getmemo = myDatalists.getMemo();
-
         int ID = memoDataLists.get(position).getId();
         Fragment1.memoDatabase.memoDao().updatememo(getmemo,ID);
-
-
         memoDataLists.set(position,myDatalists);
         notifyItemChanged(position);
         //Log.v("태그","메세지5");
     }
 
-
-
-
     public class ViewHolder extends RecyclerView.ViewHolder{
-        public TextView txtmemo,txtAP;
+        public TextView txtmemo;
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
             txtmemo=(TextView)itemView.findViewById(R.id.txt_memo);
-            txtAP=(TextView)itemView.findViewById(R.id.txt_AMPM);
 
         }
         public void onBind(MemoDatalist memoDataLists) {
             txtmemo.setText(memoDataLists.getMemo());
-            txtAP.setText(memoDataLists.getAM_PM());
 
         }
 

@@ -24,7 +24,8 @@ import java.util.GregorianCalendar;
 import java.util.Locale;
 
 public class Main extends AppCompatActivity {
-    public static Calendar calendar1= Calendar.getInstance();
+    public static Calendar calendar1 = Calendar.getInstance();
+    public static Calendar calendar2 = Calendar.getInstance();
     BottomNavigationView bottomNavigationView;
     Fragment1 fragment1;
     Fragment2 fragment2;
@@ -36,32 +37,15 @@ public class Main extends AppCompatActivity {
         setContentView(R.layout.main);
         bottomNavigationView = findViewById(R.id.bottomNavigationView);
 
-
-
         SharedPreferences sharedPreferencesAM = getSharedPreferences("daily alarm", MODE_PRIVATE);
         long AM = sharedPreferencesAM.getLong("nextNotifyTime", Calendar.getInstance().getTimeInMillis());
         Calendar nextNotifyTimeAM = new GregorianCalendar();
         nextNotifyTimeAM.setTimeInMillis(AM);
-
-        //  Preference에 설정한 값 저장
-
-        calendar1.set(Calendar.HOUR_OF_DAY, 12);
+        calendar1.set(Calendar.HOUR_OF_DAY, 00);
         calendar1.set(Calendar.MINUTE, 00);
         calendar1.set(Calendar.SECOND, 00);
 
-
-
-      if (calendar1.before(Calendar.getInstance())) {
-            //calendar1.add(Calendar.DATE, 1);
-            calendar1.add(Calendar.HOUR_OF_DAY, 12);
-            //calendar1.add(Calendar.MINUTE, 5);
-      }
-
-        SharedPreferences.Editor editorAM = getSharedPreferences("daily alarm", MODE_PRIVATE).edit();
-        editorAM.putLong("nextNotifyTime", (long) calendar1.getTimeInMillis());
-        editorAM.apply();
         diaryNotification(calendar1);
-
 
         //프래그먼트 생성
         fragment1 = new Fragment1();
@@ -85,13 +69,11 @@ public class Main extends AppCompatActivity {
                         getSupportFragmentManager().beginTransaction() .replace(R.id.main_layout,fragment2).commitAllowingStateLoss();
                         return true;
                     }
-
                     default: return false;
                 }
             }
         });
     }
-
 
     boolean diaryNotification(Calendar calendar)
     {
@@ -104,11 +86,8 @@ public class Main extends AppCompatActivity {
         PendingIntent pendingIntent = PendingIntent.getBroadcast(this, 0, alarmIntent, 0);
         AlarmManager alarmManager = (AlarmManager) getSystemService(Context.ALARM_SERVICE);
 
-
-
         // 사용자가 매일 알람을 허용했다면
         if (dailyNotify) {
-
 
             if (alarmManager != null) {
 
@@ -119,19 +98,11 @@ public class Main extends AppCompatActivity {
                     alarmManager.setExactAndAllowWhileIdle(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(), pendingIntent);
                 }
             }
-
             // 부팅 후 실행되는 리시버 사용가능하게 설정
             pm.setComponentEnabledSetting(receiver,
                     PackageManager.COMPONENT_ENABLED_STATE_ENABLED,
                     PackageManager.DONT_KILL_APP);
-
-
         }
-
-
         return false;
     }
-
-
-
 }

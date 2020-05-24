@@ -22,41 +22,30 @@ public class CustomDialog extends Dialog {
         requestWindowFeature(Window.FEATURE_NO_TITLE);
         getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
         setContentView(R.layout.customdialog);
-
         memo = memoDataList.getMemo();
-
-
         //이름, 나이 EditText에 값 채우기
         mod_memo = findViewById(R.id.mod_memo);
         mod_memo.setText(memo);
-
-
         mod_bt = findViewById(R.id.mod_bt);
+
         mod_bt.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
                 if(listener!=null){
                     //EditText의 수정된 값 가져오기
                     String memo = mod_memo.getText().toString();
-
                     MemoDatalist memoDataList=new MemoDatalist();
                     memoDataList.setMemo(memo);
-
-
                     //Listener를 통해서 person객체 전달
                     listener.onFinish(position, memoDataList);
                     //다이얼로그 종료
                     Toast.makeText(context.getApplicationContext(),"일정이 수정되었습니다.",Toast.LENGTH_LONG).show();
                     dismiss();
                 }
-
-
             }
         });
     }
     public void setDialogListener(OnDialogListener listener){
         this.listener = listener;
     }
-
 }

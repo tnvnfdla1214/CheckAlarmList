@@ -29,23 +29,6 @@
             android:layout_height="wrap_content"
             android:orientation="horizontal"
             >
-            <View
-                android:layout_width="0dp"
-                android:layout_height="0dp"
-                android:layout_weight="1" />
-            <CheckBox
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="AM"
-                android:id="@+id/AM"
-                android:layout_marginRight="20dp"
-                android:checked="false"/>
-            <CheckBox
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="PM"
-                android:id="@+id/PM"
-                android:checked="false" />
 
         </LinearLayout>
 

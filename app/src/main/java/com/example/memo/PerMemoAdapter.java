@@ -33,13 +33,8 @@ public class PerMemoAdapter  extends RecyclerView.Adapter<PerMemoAdapter.ViewHol
     @Override
     public void onBindViewHolder(@NonNull ViewHolder viewHolder, int position) {
         MemoDatalist md=memoDataLists.get(position);
-
-
         viewHolder.txtmemo.setText(md.getMemo());
-
         viewHolder.onBind(memoDataLists.get(position));
-
-
     }
 
     @Override
@@ -95,19 +90,13 @@ public class PerMemoAdapter  extends RecyclerView.Adapter<PerMemoAdapter.ViewHol
 
     @Override
     public void onRightClick(int position, RecyclerView.ViewHolder viewHolder) {
-
-
         int ID = memoDataLists.get(position).getId();
         Fragment2.memoDatabase.memoDao().deleteData(ID);
-
-
         Toast.makeText(context.getApplicationContext(),"일정이 삭제되었습니다.",Toast.LENGTH_LONG).show();
-
         memoDataLists.remove(position);
         notifyItemRemoved(position);
         //Log.v("태그","메세지4");
     }
-
 
     @Override
     public void onFinish(int position,MemoDatalist myDatalists) {
@@ -121,20 +110,15 @@ public class PerMemoAdapter  extends RecyclerView.Adapter<PerMemoAdapter.ViewHol
         //Log.v("태그","메세지5");
     }
 
-
-
-
     public class ViewHolder extends RecyclerView.ViewHolder{
-        public TextView txtmemo,txtAP;
+        public TextView txtmemo;
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
             txtmemo=(TextView)itemView.findViewById(R.id.txt_memo);
-            txtAP=(TextView)itemView.findViewById(R.id.txt_AMPM);
 
         }
         public void onBind(MemoDatalist memoDataLists) {
             txtmemo.setText(memoDataLists.getMemo());
-            txtAP.setText(memoDataLists.getAM_PM());
 
         }
 

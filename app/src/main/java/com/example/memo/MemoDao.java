@@ -12,21 +12,14 @@ import java.util.List;
 public interface MemoDao  {
     @Insert
     void addData(MemoDatalist memodatalist);
-
     @Update
     public void update(MemoDatalist memodatalist);
-
     @Query("select * from memodatalist where id = :id")
     List<MemoDatalist> load(int id);
-
-
     @Query("select * from memodatalist")
     public List<MemoDatalist> getMemoData();
-
     @Query ("delete from memodatalist where id = :id")
     public void  deleteData(int id);
-
-
     @Query ("update memodatalist set memo = :setmemo where id = :posid")
     public void  updatememo(String setmemo, int posid);
 
@@ -37,12 +30,5 @@ public interface MemoDao  {
     public void  checkData(int posid);
     @Query ("update memodatalist set Alarm = 1 where Alarm = 2 ")  //2->1
     public void  resetData();
-
-    @Query ("update memodatalist set Alarm = 1 where AM_PM = '오전'")  //->3
-    public void  resetAm();
-    @Query ("update memodatalist set Alarm = 1 where AM_PM = '오후'")  //->4
-    public void  resetPm();
-
-
 
 }

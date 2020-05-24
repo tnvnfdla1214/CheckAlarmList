@@ -34,7 +34,6 @@ public class Fragment1 extends Fragment {
     MemoAdapter adapter;
     Button btn_save;
 
-
     public static Fragment1 mContext;
 
     @Override
@@ -43,42 +42,24 @@ public class Fragment1 extends Fragment {
         super.onCreate(savedInstanceState);
     }
 
-
-
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 
         viewGroup = (ViewGroup) inflater.inflate(R.layout.activity_main,container,false);
 
-        //1번
         memoDatabase= Room.databaseBuilder(getActivity().getApplicationContext(),MemoDatabase.class,"infodb").allowMainThreadQueries().build();
-
-
-
-        //2번
         rv=(RecyclerView)viewGroup.findViewById(R.id.rec);
         rv.setHasFixedSize(true);
-        //4번
         rv.setLayoutManager(new LinearLayoutManager(getActivity()));
-
-
         memoDataLists=memoDatabase.memoDao().getData();
-
-
-        //memoDataLists=Fragment1.memoDatabase.memoDao().getData();
-        //RecyclerView의 Adapter 세팅
-        //5번
         adapter = new MemoAdapter(memoDataLists,getContext());
         rv.setAdapter(adapter);
-
 
         //ItemTouchHelper 생성
         helper = new ItemTouchHelper(new ItemTouchHelperCallback(adapter));
         //RecyclerView에 ItemTouchHelper 붙이기
         helper.attachToRecyclerView(rv);
-
-        //2번
         btn_save=(Button)viewGroup.findViewById(R.id.add_bt);
         btn_save.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -90,7 +71,6 @@ public class Fragment1 extends Fragment {
         });
         return viewGroup;
     }
-
     public void Review(){
         memoDataLists=memoDatabase.memoDao().getData();
         //RecyclerView의 Adapter 세팅
