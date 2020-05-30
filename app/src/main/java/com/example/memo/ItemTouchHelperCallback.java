@@ -4,6 +4,7 @@ import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.RectF;
+import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
 
@@ -44,6 +45,7 @@ public class ItemTouchHelperCallback extends ItemTouchHelper.Callback  {
     @Override
     public boolean onMove(@NonNull RecyclerView recyclerView, @NonNull RecyclerView.ViewHolder viewHolder, @NonNull RecyclerView.ViewHolder target) {
         return listener.onItemMove(viewHolder.getAdapterPosition(), target.getAdapterPosition());
+
     }
 
     @Override
@@ -58,8 +60,7 @@ public class ItemTouchHelperCallback extends ItemTouchHelper.Callback  {
         if (actionState == ItemTouchHelper.ACTION_STATE_SWIPE) {
             if (buttonsShowedState != ButtonsState.GONE) {
                 if (buttonsShowedState == ButtonsState.LEFT_VISIBLE) dX = Math.max(dX, buttonWidth);
-                if (buttonsShowedState == ButtonsState.RIGHT_VISIBLE)
-                    dX = Math.min(dX, -buttonWidth);
+                if (buttonsShowedState == ButtonsState.RIGHT_VISIBLE)dX = Math.min(dX, -buttonWidth);
                 super.onChildDraw(c, recyclerView, viewHolder, dX, dY, actionState, isCurrentlyActive);
             } else {
                 setTouchListener(c, recyclerView, viewHolder, dX, dY, actionState, isCurrentlyActive);

@@ -3,6 +3,7 @@ package com.example.memo;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
@@ -10,6 +11,7 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.ItemTouchHelper;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.List;
@@ -41,9 +43,23 @@ public class AddDataActivity extends AppCompatActivity {
                 editor.putInt("ID_len",ID_len);
 
                 etmemo.setText("");
+                Fragment1.mContext.Review();
 
-                ((Fragment1) Fragment1.mContext).Review();
             }
         });
+
     }
+
+    /*
+    @Override
+    public void onBackPressed() {
+
+        super.onBackPressed();
+        Fragment1.mContext.test();
+        Log.d("제발","ㅁㄴㅇ");
+    }
+
+     */
+
 }
+

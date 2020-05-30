@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -25,6 +26,7 @@ import java.util.List;
 import java.util.Locale;
 
 public class Fragment1 extends Fragment {
+
     ViewGroup viewGroup;
 
     List<MemoDatalist> memoDataLists;
@@ -36,11 +38,14 @@ public class Fragment1 extends Fragment {
 
     public static Fragment1 mContext;
 
+    /*
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         mContext = this;
         super.onCreate(savedInstanceState);
     }
+
+     */
 
     @Nullable
     @Override
@@ -60,6 +65,7 @@ public class Fragment1 extends Fragment {
         helper = new ItemTouchHelper(new ItemTouchHelperCallback(adapter));
         //RecyclerView에 ItemTouchHelper 붙이기
         helper.attachToRecyclerView(rv);
+        Review();
         btn_save=(Button)viewGroup.findViewById(R.id.add_bt);
         btn_save.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -69,14 +75,28 @@ public class Fragment1 extends Fragment {
                 startActivity(intent);
             }
         });
+
+
         return viewGroup;
     }
+
+
+    @Override
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        mContext = this;
+        super.onCreate(savedInstanceState);
+
+    }
+
     public void Review(){
         memoDataLists=memoDatabase.memoDao().getData();
         //RecyclerView의 Adapter 세팅
         //5번
         adapter = new MemoAdapter(memoDataLists,getContext());
         rv.setAdapter(adapter);
+
     }
+
+    
 
 }

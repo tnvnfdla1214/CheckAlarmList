@@ -7,6 +7,7 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.util.Log;
 import android.widget.Toast;
 
 import androidx.core.app.NotificationCompat;
@@ -22,12 +23,14 @@ import static android.content.Context.MODE_PRIVATE;
 import static com.example.memo.Main.calendar1;
 
 public class AlarmReceiver extends BroadcastReceiver {
-    List<MemoDatalist> memoDataLists;
+    Intent seviceIntent;
+
     @Override
     public void onReceive(Context context, Intent intent) {
 
+
         NotificationManager notificationManager = (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
-        Intent notificationIntent = new Intent(context, Main.class);
+        Intent notificationIntent = new Intent(context, Fragment1.class);
         notificationIntent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP
                 | Intent.FLAG_ACTIVITY_SINGLE_TOP);
         PendingIntent pendingI = PendingIntent.getActivity(context, 0,
@@ -64,8 +67,6 @@ public class AlarmReceiver extends BroadcastReceiver {
 
         if (notificationManager != null) {
 
-
-
             // 노티피케이션 동작시킴
             notificationManager.notify(1234, builder.build());
             Calendar nextNotifyTime = Calendar.getInstance();
@@ -76,15 +77,8 @@ public class AlarmReceiver extends BroadcastReceiver {
             editor.putLong("nextNotifyTime", nextNotifyTime.getTimeInMillis());
             editor.apply();
 
-
-            if(00 <= Calendar.getInstance().get(Calendar.HOUR_OF_DAY) && Calendar.getInstance().get(Calendar.HOUR_OF_DAY) < 01
-             && 00 <= Calendar.getInstance().get(Calendar.MINUTE) && Calendar.getInstance().get(Calendar.MINUTE) < 01
-             && 00 <= Calendar.getInstance().get(Calendar.SECOND) && Calendar.getInstance().get(Calendar.SECOND) < 01){
-
-                Fragment1.memoDatabase.memoDao().resetData();
-                (Fragment1.mContext).Review();
-            }
-
+            //seviceIntent = new Intent(this,MyService.class);
+            //startService(seviceIntent);
 
         }
     }

@@ -10,6 +10,10 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import java.util.List;
+
+import static com.example.memo.Fragment1.memoDatabase;
+
 public class CustomDialog extends Dialog {
     private OnDialogListener listener;
     private Context context;
@@ -33,14 +37,17 @@ public class CustomDialog extends Dialog {
             public void onClick(View v) {
                 if(listener!=null){
                     //EditText의 수정된 값 가져오기
+
                     String memo = mod_memo.getText().toString();
                     MemoDatalist memoDataList=new MemoDatalist();
                     memoDataList.setMemo(memo);
                     //Listener를 통해서 person객체 전달
+
                     listener.onFinish(position, memoDataList);
                     //다이얼로그 종료
                     Toast.makeText(context.getApplicationContext(),"일정이 수정되었습니다.",Toast.LENGTH_LONG).show();
                     dismiss();
+                    Fragment1.mContext.Review();
                 }
             }
         });

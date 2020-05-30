@@ -12,6 +12,7 @@ import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.os.Build;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.MenuItem;
 import android.widget.Toast;
 
@@ -28,30 +29,32 @@ public class Main extends AppCompatActivity {
     BottomNavigationView bottomNavigationView;
     Fragment1 fragment1;
     Fragment2 fragment2;
-    public static int min = calendar1.MINUTE;
-//    Calendar calendar1
+    public static Context mContext;
+
+
+    //public static Calendar calendar2;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.main);
         bottomNavigationView = findViewById(R.id.bottomNavigationView);
+        mContext = this;
 
-        SharedPreferences sharedPreferencesAM = getSharedPreferences("daily alarm", MODE_PRIVATE);
-        long AM = sharedPreferencesAM.getLong("nextNotifyTime", Calendar.getInstance().getTimeInMillis());
-        Calendar nextNotifyTimeAM = new GregorianCalendar();
-        nextNotifyTimeAM.setTimeInMillis(AM);
-        calendar1.set(Calendar.HOUR_OF_DAY, 00);
-        calendar1.set(Calendar.MINUTE, 00);
+        calendar1.set(Calendar.HOUR_OF_DAY, 07);
+        calendar1.set(Calendar.MINUTE, 05);
         calendar1.set(Calendar.SECOND, 00);
 
         if (calendar1.before(Calendar.getInstance())) {
             calendar1.add(Calendar.DATE, 1);
         }
+
+
         SharedPreferences.Editor editorAM = getSharedPreferences("daily alarm", MODE_PRIVATE).edit();
         editorAM.putLong("nextNotifyTime", (long) calendar1.getTimeInMillis());
         editorAM.apply();
         diaryNotification(calendar1);
+
 
         //프래그먼트 생성
         fragment1 = new Fragment1();
@@ -59,6 +62,8 @@ public class Main extends AppCompatActivity {
 
         //제일 처음 띄워줄 뷰를 세팅해줍니다. commit();까지 해줘야 합니다.
         getSupportFragmentManager().beginTransaction().replace(R.id.main_layout, fragment1).commitAllowingStateLoss();
+        Log.d("asd","asd100");
+
 
         //bottomnavigationview의 아이콘을 선택 했을때 원하는 프래그먼트가 띄워질 수 있도록 리스너를 추가합니다.
         bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
@@ -68,7 +73,6 @@ public class Main extends AppCompatActivity {
                     //menu_bottom.xml에서 지정해줬던 아이디 값을 받아와서 각 아이디값마다 다른 이벤트를 발생시킵니다.
                     case R.id.tab1:{
                         getSupportFragmentManager().beginTransaction() .replace(R.id.main_layout,fragment1).commitAllowingStateLoss();
-//                            startActivity(new Intent(Main.this,MainActivity.class));
                         return true;
                     }
                     case R.id.tab2:{
@@ -96,12 +100,12 @@ public class Main extends AppCompatActivity {
         if (dailyNotify) {
 
             if (alarmManager != null) {
-
                 alarmManager.setRepeating(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(),
                         AlarmManager.INTERVAL_DAY, pendingIntent);
 
                 if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
                     alarmManager.setExactAndAllowWhileIdle(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(), pendingIntent);
+
                 }
             }
             // 부팅 후 실행되는 리시버 사용가능하게 설정
@@ -111,4 +115,6 @@ public class Main extends AppCompatActivity {
         }
         return false;
     }
+
+
 }

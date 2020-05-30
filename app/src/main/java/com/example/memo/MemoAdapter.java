@@ -2,6 +2,7 @@ package com.example.memo;
 
 import android.content.Context;
 import android.util.DisplayMetrics;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,6 +15,8 @@ import androidx.recyclerview.widget.RecyclerView;
 import androidx.room.Database;
 
 import java.util.List;
+
+import static com.example.memo.Fragment1.memoDatabase;
 
 public class MemoAdapter  extends RecyclerView.Adapter<MemoAdapter.ViewHolder> implements ItemTouchHelperListener,OnDialogListener{
     List<MemoDatalist> memoDataLists;
@@ -31,9 +34,11 @@ public class MemoAdapter  extends RecyclerView.Adapter<MemoAdapter.ViewHolder> i
     }
     @Override
     public void onBindViewHolder(@NonNull ViewHolder viewHolder, int position) {
+
         MemoDatalist md=memoDataLists.get(position);
         viewHolder.txtmemo.setText(md.getMemo());
         viewHolder.onBind(memoDataLists.get(position));
+
     }
 
     @Override
@@ -43,8 +48,10 @@ public class MemoAdapter  extends RecyclerView.Adapter<MemoAdapter.ViewHolder> i
 
     @Override
     public boolean onItemMove(int from_position, int to_position) {
+        Log.d("제발",from_position+"");
         //이동할 객체 저장
         MemoDatalist memoDatalist = memoDataLists.get(from_position);
+        //Log.d("제발",memoDataLists.get(0)+"");
         //이동할 객체 삭제
         memoDataLists.remove(from_position);
         //이동하고 싶은 position에 추가
@@ -66,6 +73,7 @@ public class MemoAdapter  extends RecyclerView.Adapter<MemoAdapter.ViewHolder> i
     @Override
     public void onLeftClick(int position, RecyclerView.ViewHolder viewHolder) {
 
+        memoDataLists=memoDatabase.memoDao().getData();
         //수정 버튼 클릭시 다이얼로그 생성
         //CustomDialog dialog = new CustomDialog(context, position, items.get(position));
         CustomDialog dialog = new CustomDialog(context, position, memoDataLists.get(position));
@@ -90,13 +98,24 @@ public class MemoAdapter  extends RecyclerView.Adapter<MemoAdapter.ViewHolder> i
     public void onRightClick(int position, RecyclerView.ViewHolder viewHolder) {
 
 
+
+        memoDataLists=memoDatabase.memoDao().getData();
+
+        Log.d("제발","제발요");
+        Log.d("제발",position+"");
+        Log.d("제발",memoDataLists.get(position).getId()+"");
         int ID = memoDataLists.get(position).getId();
-        Fragment1.memoDatabase.memoDao().checkData(ID);
+        Log.d("asd","hfj,l.");
+        memoDatabase.memoDao().checkData(ID);
+        Log.d("asd","asd12");
+        Fragment1.mContext.Review();
 
         Toast.makeText(context.getApplicationContext(),"일정이 확인되었습니다.",Toast.LENGTH_LONG).show();
 
         memoDataLists.remove(position);
+        Log.d("asd","asd13");
         notifyItemRemoved(position);
+        Log.d("asd","asd14");
         //Log.v("태그","메세지4");
 
 
@@ -107,7 +126,7 @@ public class MemoAdapter  extends RecyclerView.Adapter<MemoAdapter.ViewHolder> i
     public void onFinish(int position,MemoDatalist myDatalists) {
         String getmemo = myDatalists.getMemo();
         int ID = memoDataLists.get(position).getId();
-        Fragment1.memoDatabase.memoDao().updatememo(getmemo,ID);
+        memoDatabase.memoDao().updatememo(getmemo,ID);
         memoDataLists.set(position,myDatalists);
         notifyItemChanged(position);
         //Log.v("태그","메세지5");
