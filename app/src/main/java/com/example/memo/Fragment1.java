@@ -36,6 +36,7 @@ public class Fragment1 extends Fragment {
     MemoAdapter adapter;
     Button btn_save;
 
+
     public static Fragment1 mContext;
 
     /*
@@ -53,7 +54,12 @@ public class Fragment1 extends Fragment {
 
         viewGroup = (ViewGroup) inflater.inflate(R.layout.activity_main,container,false);
 
-        memoDatabase= Room.databaseBuilder(getActivity().getApplicationContext(),MemoDatabase.class,"infodb").allowMainThreadQueries().build();
+        if(memoDataLists==null){
+            memoDatabase= Room.databaseBuilder(getActivity().getApplicationContext(),MemoDatabase.class,"infodb").allowMainThreadQueries().build();
+        }
+        else{
+            memoDataLists=memoDatabase.memoDao().getData();
+        }
         rv=(RecyclerView)viewGroup.findViewById(R.id.rec);
         rv.setHasFixedSize(true);
         rv.setLayoutManager(new LinearLayoutManager(getActivity()));

@@ -23,14 +23,12 @@ import static android.content.Context.MODE_PRIVATE;
 import static com.example.memo.Main.calendar1;
 
 public class AlarmReceiver extends BroadcastReceiver {
-    Intent seviceIntent;
-
     @Override
     public void onReceive(Context context, Intent intent) {
 
 
         NotificationManager notificationManager = (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
-        Intent notificationIntent = new Intent(context, Fragment1.class);
+        Intent notificationIntent = new Intent(context, Main.class);
         notificationIntent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP
                 | Intent.FLAG_ACTIVITY_SINGLE_TOP);
         PendingIntent pendingI = PendingIntent.getActivity(context, 0,
@@ -39,6 +37,7 @@ public class AlarmReceiver extends BroadcastReceiver {
 
         //OREO API 26 이상에서는 채널 필요
         if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.O) {
+
 
             builder.setSmallIcon(R.drawable.ic_launcher_foreground); //mipmap 사용시 Oreo 이상에서 시스템 UI 에러남
             String channelName ="매일 알람 채널";

@@ -31,6 +31,8 @@ public class Main extends AppCompatActivity {
     Fragment2 fragment2;
     public static Context mContext;
 
+    private Intent mIntent;
+
 
     //public static Calendar calendar2;
 
@@ -41,11 +43,15 @@ public class Main extends AppCompatActivity {
         bottomNavigationView = findViewById(R.id.bottomNavigationView);
         mContext = this;
 
-        calendar1.set(Calendar.HOUR_OF_DAY, 07);
-        calendar1.set(Calendar.MINUTE, 05);
+        calendar1.set(Calendar.HOUR_OF_DAY, 00);
+        calendar1.set(Calendar.MINUTE, 16);
         calendar1.set(Calendar.SECOND, 00);
 
         if (calendar1.before(Calendar.getInstance())) {
+
+            mIntent=  new Intent(getApplicationContext(), MyService.class);
+            startService(mIntent);
+            //stopService(mIntent);
             calendar1.add(Calendar.DATE, 1);
         }
 
@@ -83,6 +89,9 @@ public class Main extends AppCompatActivity {
                 }
             }
         });
+
+
+
     }
 
     boolean diaryNotification(Calendar calendar)
@@ -98,6 +107,8 @@ public class Main extends AppCompatActivity {
 
         // 사용자가 매일 알람을 허용했다면
         if (dailyNotify) {
+
+
 
             if (alarmManager != null) {
                 alarmManager.setRepeating(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(),
