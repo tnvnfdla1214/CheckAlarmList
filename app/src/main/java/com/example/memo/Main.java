@@ -12,17 +12,22 @@ import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
 import android.util.Log;
 import android.view.MenuItem;
 import android.widget.Toast;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
+import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.GregorianCalendar;
 import java.util.Locale;
+
+import static com.google.gson.internal.bind.util.ISO8601Utils.format;
 
 public class Main extends AppCompatActivity {
     public static Calendar calendar1 = Calendar.getInstance();
@@ -34,6 +39,20 @@ public class Main extends AppCompatActivity {
     private Intent mIntent;
 
 
+    // 현재시간을 msec 으로 구한다.
+    long now;
+    // 현재시간을 date 변수에 저장한다.
+    Date date ;
+
+    // 시간을 나타냇 포맷을 정한다 ( yyyy/MM/dd 같은 형태로 변형 가능 )
+    SimpleDateFormat sdfNow = new SimpleDateFormat("HH:mm:ss");
+    // nowDate 변수에 값을 저장한다.
+    String formatDate;
+
+
+
+
+
     //public static Calendar calendar2;
 
     @Override
@@ -43,8 +62,8 @@ public class Main extends AppCompatActivity {
         bottomNavigationView = findViewById(R.id.bottomNavigationView);
         mContext = this;
 
-        calendar1.set(Calendar.HOUR_OF_DAY, 00);
-        calendar1.set(Calendar.MINUTE, 16);
+        calendar1.set(Calendar.HOUR_OF_DAY, 06);
+        calendar1.set(Calendar.MINUTE, 39);
         calendar1.set(Calendar.SECOND, 00);
 
         if (calendar1.before(Calendar.getInstance())) {
@@ -54,6 +73,11 @@ public class Main extends AppCompatActivity {
             //stopService(mIntent);
             calendar1.add(Calendar.DATE, 1);
         }
+
+
+        ShowTimeMethod();
+
+
 
 
         SharedPreferences.Editor editorAM = getSharedPreferences("daily alarm", MODE_PRIVATE).edit();
@@ -125,6 +149,38 @@ public class Main extends AppCompatActivity {
                     PackageManager.DONT_KILL_APP);
         }
         return false;
+    }
+
+    public void ShowTimeMethod(){
+        final Handler handler = new Handler(){
+            @Override
+            public void handleMessage(Message msg){
+                format(new Date());
+                now=System.currentTimeMillis();
+                date = new Date(now);
+                formatDate = sdfNow.format(date);
+
+                if(formatDate.equals("06:43:00")){
+                    Log.d("태그","들어와라");
+                    Fragment1.mContext.memoDatabase.memoDao().resetData();
+                    Fragment1.mContext.Review();
+                }
+
+            }
+        };
+        Runnable task = new Runnable() {
+            @Override
+            public void run() {
+                while (true){
+                    try{
+                        Thread.sleep(1000);
+                    }catch (InterruptedException e){}
+                    handler.sendEmptyMessage(1);
+                }
+            }
+        };
+        Thread thread = new Thread(task);
+        thread.start();
     }
 
 
