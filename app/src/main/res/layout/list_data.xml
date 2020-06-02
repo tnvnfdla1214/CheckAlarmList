@@ -9,10 +9,12 @@
         android:layout_height="match_parent"
         app:cardBackgroundColor="#FFFFFF"
         app:cardUseCompatPadding="true">
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal">
+
             <TableLayout
                 android:gravity="center"
                 android:stretchColumns="1"
@@ -29,11 +31,13 @@
                         android:layout_height="wrap_content"
 
                         android:textSize="30sp" />
+
                 </TableRow>
 
-
             </TableLayout>
+
         </LinearLayout>
+
     </androidx.cardview.widget.CardView>
 
 </FrameLayout>

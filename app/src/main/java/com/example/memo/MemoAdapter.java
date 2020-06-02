@@ -9,11 +9,8 @@ import android.view.ViewGroup;
 import android.view.WindowManager;
 import android.widget.TextView;
 import android.widget.Toast;
-
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
-import androidx.room.Database;
-
 import java.util.List;
 
 import static com.example.memo.Fragment1.memoDatabase;
@@ -26,19 +23,20 @@ public class MemoAdapter  extends RecyclerView.Adapter<MemoAdapter.ViewHolder> i
         this.memoDataLists = myDataLists;
         this.context = context;
     }
+
     @NonNull
     @Override
+    // 데이터를 담기 위한 list_data 연결
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int position) {
         View view= LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.list_data,viewGroup,false);
         return new ViewHolder(view);
     }
+
     @Override
     public void onBindViewHolder(@NonNull ViewHolder viewHolder, int position) {
-
         MemoDatalist md=memoDataLists.get(position);
         viewHolder.txtmemo.setText(md.getMemo());
         viewHolder.onBind(memoDataLists.get(position));
-
     }
 
     @Override
@@ -48,10 +46,8 @@ public class MemoAdapter  extends RecyclerView.Adapter<MemoAdapter.ViewHolder> i
 
     @Override
     public boolean onItemMove(int from_position, int to_position) {
-        Log.d("제발",from_position+"");
         //이동할 객체 저장
         MemoDatalist memoDatalist = memoDataLists.get(from_position);
-        //Log.d("제발",memoDataLists.get(0)+"");
         //이동할 객체 삭제
         memoDataLists.remove(from_position);
         //이동하고 싶은 position에 추가
@@ -59,7 +55,6 @@ public class MemoAdapter  extends RecyclerView.Adapter<MemoAdapter.ViewHolder> i
         memoDataLists.add(to_position,memoDatalist);
         //Adapter에 데이터 이동알림
         notifyItemMoved(from_position,to_position);
-
         return true;
     }
 
@@ -67,69 +62,46 @@ public class MemoAdapter  extends RecyclerView.Adapter<MemoAdapter.ViewHolder> i
     public void onItemSwipe(int position) {
         memoDataLists.remove(position);
         notifyItemRemoved(position);
-        //Log.v("태그","메세지2");
     }
 
+    // 왼쪽 스와이프 클릭시
     @Override
     public void onLeftClick(int position, RecyclerView.ViewHolder viewHolder) {
 
         memoDataLists=memoDatabase.memoDao().getData();
-        //수정 버튼 클릭시 다이얼로그 생성
-        //CustomDialog dialog = new CustomDialog(context, position, items.get(position));
-        CustomDialog dialog = new CustomDialog(context, position, memoDataLists.get(position));
 
-        //화면 사이즈 구하기
-        DisplayMetrics dm = context.getApplicationContext().getResources().getDisplayMetrics();
+        CustomDialog dialog = new CustomDialog(context, position, memoDataLists.get(position));     // 수정 버튼 클릭시 다이얼로그 생성
+        DisplayMetrics dm = context.getApplicationContext().getResources().getDisplayMetrics();     // 화면 사이즈
         int width = dm.widthPixels;
         int height = dm.heightPixels;
-        //다이얼로그 사이즈 세팅
-        WindowManager.LayoutParams wm = dialog.getWindow().getAttributes();
+        WindowManager.LayoutParams wm = dialog.getWindow().getAttributes();                         // 다이얼로그 사이즈
         wm.copyFrom(dialog.getWindow().getAttributes());
         wm.width = (int) (width * 0.7);
         wm.height = height/2;
-        //다이얼로그 Listener 세팅
-        dialog.setDialogListener(this);
-        //다이얼로그 띄우기
-        dialog.show();
-        //Log.v("태그","메세지3");
+
+        dialog.setDialogListener(this);                 //다이얼로그 Listener 세팅
+        dialog.show();                                  //다이얼로그 띄우기
     }
 
+    // 오른쪽 스와이프 클릭시
     @Override
     public void onRightClick(int position, RecyclerView.ViewHolder viewHolder) {
-
-
-
         memoDataLists=memoDatabase.memoDao().getData();
-
-        Log.d("제발","제발요");
-        Log.d("제발",position+"");
-        Log.d("제발",memoDataLists.get(position).getId()+"");
-        int ID = memoDataLists.get(position).getId();
-        Log.d("asd","hfj,l.");
-        memoDatabase.memoDao().checkData(ID);
-        Log.d("asd","asd12");
-        Fragment1.mContext.Review();
-
+        int ID = memoDataLists.get(position).getId();       // position으로 ID를 get
+        memoDatabase.memoDao().checkData(ID);               // 해당 ID의 메모 데이터를 check (Alarm 1 --> 2)
+        Fragment1.mContext.Review();                        // Review 실행
         Toast.makeText(context.getApplicationContext(),"일정이 확인되었습니다.",Toast.LENGTH_LONG).show();
-
-        memoDataLists.remove(position);
-        Log.d("asd","asd13");
+        memoDataLists.remove(position);                     // 해당 position의 리스트의 데이터는 삭제한다.
         notifyItemRemoved(position);
-        Log.d("asd","asd14");
-        //Log.v("태그","메세지4");
-
-
     }
-
 
     @Override
     public void onFinish(int position,MemoDatalist myDatalists) {
-        String getmemo = myDatalists.getMemo();
-        int ID = memoDataLists.get(position).getId();
-        memoDatabase.memoDao().updatememo(getmemo,ID);
-        memoDataLists.set(position,myDatalists);
+        String getmemo = myDatalists.getMemo();             // 수정하려는 메모를 get
+        int ID = memoDataLists.get(position).getId();       // 수정하려는 위치의 position 으로 Id를 get
+        memoDatabase.memoDao().updatememo(getmemo,ID);      // 수정하려는 메모로 update
+        memoDataLists.set(position,myDatalists);            // RecyclerView와 연결되어 표현하기 위한 memoDataLists에도 적용
         notifyItemChanged(position);
-        //Log.v("태그","메세지5");
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder{
@@ -137,14 +109,9 @@ public class MemoAdapter  extends RecyclerView.Adapter<MemoAdapter.ViewHolder> i
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
             txtmemo=(TextView)itemView.findViewById(R.id.txt_memo);
-
         }
         public void onBind(MemoDatalist memoDataLists) {
             txtmemo.setText(memoDataLists.getMemo());
-
         }
-
     }
-
-
 }

@@ -6,7 +6,6 @@
     android:layout_height="match_parent"
     >
 
-
     <LinearLayout
         android:layout_margin="10dp"
         android:layout_width="match_parent"
@@ -32,10 +31,7 @@
 
         </LinearLayout>
 
-
-
     </LinearLayout>
-
 
     <Button
         android:id="@+id/btn_add"
@@ -46,4 +42,5 @@
         android:textColor="@android:color/white"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
+
 </LinearLayout>

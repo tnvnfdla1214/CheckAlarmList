@@ -8,22 +8,17 @@ import android.content.Intent;
 import android.os.IBinder;
 import android.os.SystemClock;
 import android.util.Log;
-
-import java.util.Calendar;
 import java.util.Timer;
 import java.util.TimerTask;
 
 public class BackGroundService extends Service {
-
     private final static String TAG = BackGroundService.class.getSimpleName();
-
     private Context context = null;
     public int counter=0;
 
     // 생성자1 : 반듯이 필요
     public BackGroundService() {
     }
-
     // 생성자2
     public BackGroundService(Context applicationContext) {
         super();
@@ -54,7 +49,6 @@ public class BackGroundService extends Service {
     public void onDestroy() {
         super.onDestroy();
         // 서비스가 종료될 때 실행
-        Log.d(TAG, "BackgroundService.onDestroy");
         //
         Intent broadcastIntent = new Intent("com.bluexmas.common.RestartService");
         sendBroadcast(broadcastIntent);

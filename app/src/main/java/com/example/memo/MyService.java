@@ -24,16 +24,15 @@ public class MyService extends Service {
         super.onCreate();
     }
 
-
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
-        Fragment1.mContext.Review();
+
         Fragment1.mContext.memoDatabase.memoDao().resetData();
+        Fragment1.mContext.Review();
         Log.d("태그","서비스 시작");
 
         return super.onStartCommand(intent, flags, startId);
     }
-
 
     @Override
     public void onDestroy() {

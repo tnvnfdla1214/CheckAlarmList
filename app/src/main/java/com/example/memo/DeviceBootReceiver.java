@@ -8,9 +8,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Build;
 import android.widget.Toast;
-
 import androidx.annotation.RequiresApi;
-
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
