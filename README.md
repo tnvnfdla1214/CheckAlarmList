@@ -46,4 +46,4 @@
 #### If the image in the app violates copyright, we will delete it and reload it.</br>
 
 ## 5. FeedBack </br>
-#### 피드백이나 기능의 개선사항에 대한 의견은 likppi100@naver.com 혹은 tnvnfdla1214@gmail.com 으로 보내주시면 감사하겠습니다.</br>
+#### 피드백이나 기능의 개선사항에 대한 의견은 likppi100@naver.com 혹은 tnvnfdla12@gmail.com 으로 보내주시면 감사하겠습니다.</br>
