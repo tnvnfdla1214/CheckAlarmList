@@ -38,12 +38,8 @@
 ### 4) Room</br>
 #### 데이터베이스의 역할을 한다. </br> 기존의 Sql문을 쓰기 번거로웠던, 단점을 극복하고 간편하게 만들었으며, Sql을 직접 쓸 수 있는 등 강력한 기능을 지원하는 개념이다.</br>(MemoDatalist.java (테이블 구성) / MemoDataDataBase.java / MemoDao.java (Sql문) ) </br>
 ### 5) Service</br>
-#### 여기다가 </br> 쓰면됨</br>(참고코드) </br>
-### 6) Handler</br>
-#### 여기다가 </br> 쓰면됨</br>(참고코드) </br>
+#### 24시 정각이 지날시 앱이 종료되어도 해당 저장되었던 리스트 정보가 다시 생성된다. onbind의 메소드 진행순서로 진행된다.</br>
+(MyService.java (서비스 구성)) </br>
 
-## 4. Copyright </br>
-#### If the image in the app violates copyright, we will delete it and reload it.</br>
-
-## 5. FeedBack </br>
+## 4. FeedBack </br>
 #### 피드백이나 기능의 개선사항에 대한 의견은 likppi100@naver.com 혹은 tnvnfdla12@gmail.com 으로 보내주시면 감사하겠습니다.</br>
